@@ -10,7 +10,7 @@ class Categoria(models.Model):
     name_cat = models.CharField(max_length=50, verbose_name='Categoria')
 
     def __str__(self):
-        return self.nome_cat
+        return self.name_cat
 
 
 class Post(models.Model):
@@ -18,18 +18,18 @@ class Post(models.Model):
     author_post = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Autor')
     date_post = models.DateTimeField(default=timezone.now, verbose_name='Data')
     content_post = models.TextField(verbose_name='Conteúdo')
-    summary_post = models.TextField(verbose_name='Excerto')
-    category_post = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, blank=True, verbose_name='Post')
+    summary_post = models.TextField(verbose_name='Resumo')
+    category_post = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, blank=True, verbose_name='Categoria')
     image_post = models.ImageField(upload_to='post_img/%Y/%m/%d', blank=True, null=True, verbose_name='Imagem')
     publisher_post = models.BooleanField(default=False, verbose_name='Publicado')        
 
     def __str__(self):
-        return self.titulo_post
+        return self.title_post
     
     def save(self, *args, **kwargs):
         super().save(*args, kwargs)
         
-        self.resize_image(self.imagem_post.name, 800)
+        self.resize_image(self.image_post.name, 800)
     
     @staticmethod
     def resize_image(img_name, new_width):
@@ -58,7 +58,7 @@ class Comentario(models.Model):
     post_comment = models.ForeignKey(Post, on_delete=models.CASCADE)
     user_comment = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
     date_comment = models.DateTimeField(default=timezone.now)
-    published_comment = models.BooleanField(default=False)
+    publisher_comment = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.nome_comentario
+        return self.name_comment

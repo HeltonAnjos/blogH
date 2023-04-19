@@ -13,7 +13,7 @@ class HomeView(ListView):
     context_object_name = 'posts'
 
 
-class PostDetalhes(View):
+class PostDetailView(View):
     template_name = 'blog/post_detail.html'
 
     def setup(self, request, *args, **kwargs):
