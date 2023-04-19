@@ -1,25 +1,64 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor_uploader.fields import RichTextUploadingField
-from ckeditor.fields import RichTextField
-from stdimage.models import StdImageField
+from django.utils import timezone
+from PIL import Image
+from django.conf import settings
+import os
 
-# Create your models here.
 
-STATUS = ((0, 'Draft'), (1, 'Published'))
+class Categoria(models.Model):
+    name_cat = models.CharField(max_length=50, verbose_name='Categoria')
+
+    def __str__(self):
+        return self.nome_cat
+
 
 class Post(models.Model):
-    title = models.CharField(verbose_name='Título', max_length=200, unique=True)
-    created_on = models.DateField(auto_now_add=True)
-    update_on = models.DateField(auto_now=True)
-    summary = RichTextField(verbose_name='Resumo', null=True, blank=True)
-    content = RichTextUploadingField(verbose_name='Conteúdo')
-    cover_image = StdImageField('Imagem Capa', upload_to='static/images', variations={'thumbnail': {"width": 200, "height": 250, "crop": True}})
-    author = models.ForeignKey(User, verbose_name='Autor', on_delete=models.CASCADE, related_name='blog_posts')
-    status = models.IntegerField(choices=STATUS, default=0)
+    title_post = models.CharField(max_length=255, verbose_name='Título')
+    author_post = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Autor')
+    date_post = models.DateTimeField(default=timezone.now, verbose_name='Data')
+    content_post = models.TextField(verbose_name='Conteúdo')
+    summary_post = models.TextField(verbose_name='Excerto')
+    category_post = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, blank=True, verbose_name='Post')
+    image_post = models.ImageField(upload_to='post_img/%Y/%m/%d', blank=True, null=True, verbose_name='Imagem')
+    publisher_post = models.BooleanField(default=False, verbose_name='Publicado')        
 
-    class Meta:
-        ordering = ['-created_on']
+    def __str__(self):
+        return self.titulo_post
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, kwargs)
+        
+        self.resize_image(self.imagem_post.name, 800)
+    
+    @staticmethod
+    def resize_image(img_name, new_width):
+        img_path = os.path.join(settings.MEDIA_ROOT, img_name)
+        img = Image.open(img.path)
+        width, height = img.size
+        new_height = round((new_width * height) / width)
+    
+        if width <= new_width:
+            img.close()
+            return
+    
+        new_img = img.resize((new_width, new_height), Image.ANTIALIAS)
+        new_img.save(
+            img_path,
+            optimize=True,
+            quality=60
+        )
+        new_img.close
+        
 
-def __str__(self):
-    return self.title 
+class Comentario(models.Model):
+    name_comment = models.CharField(max_length=150, verbose_name='Nome')
+    email_comment = models.EmailField(verbose_name='E-mail')
+    comment = models.TextField(verbose_name='Comentário')
+    post_comment = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user_comment = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
+    date_comment = models.DateTimeField(default=timezone.now)
+    published_comment = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.nome_comentario
