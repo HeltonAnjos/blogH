@@ -20,21 +20,21 @@ class Post(models.Model):
     content_post = models.TextField(verbose_name='Conteúdo')
     summary_post = models.TextField(verbose_name='Resumo')
     category_post = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, blank=True, verbose_name='Categoria')
-    image_post = models.ImageField(upload_to='post_img/%Y/%m/%d', blank=True, null=True, verbose_name='Imagem')
+    image_post = models.ImageField(upload_to ='post_img/%Y/%m/%d/', blank=True, null=True, verbose_name='Imagem')
     publisher_post = models.BooleanField(default=False, verbose_name='Publicado')        
 
     def __str__(self):
         return self.title_post
     
     def save(self, *args, **kwargs):
-        super().save(*args, kwargs)
+        super().save(*args, **kwargs)
         
         self.resize_image(self.image_post.name, 800)
     
     @staticmethod
     def resize_image(img_name, new_width):
         img_path = os.path.join(settings.MEDIA_ROOT, img_name)
-        img = Image.open(img.path)
+        img = Image.open(img_path)
         width, height = img.size
         new_height = round((new_width * height) / width)
     

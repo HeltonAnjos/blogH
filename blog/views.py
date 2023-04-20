@@ -23,8 +23,7 @@ class PostDetailView(View):
         post = get_object_or_404(Post, pk=pk, publisher_post=True)
         self.contexto = {
             'post': post,
-            'comentarios': Comentario.objects.filter(post_comment=post,
-                                                     published_comment=True),
+            'comentarios': Comentario.objects.filter(post_comment=post, publisher_comment=True),
             'form': FormComentario(request.POST or None),
         }
 
@@ -40,7 +39,7 @@ class PostDetailView(View):
         comentario = form.save(commit=False)
 
         if request.user.is_authenticated:
-            comentario.usuario_comentario = request.user
+            comentario.user_comment = request.user
 
         comentario.post_comment = self.contexto['post']
         comentario.save()
