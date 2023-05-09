@@ -5,9 +5,10 @@ from PIL import Image
 from django.conf import settings
 import os
 
-
+    
 class Categoria(models.Model):
     name_cat = models.CharField(max_length=50, verbose_name='Categoria')
+    image_cat = models.ImageField(upload_to ='category_img/%Y/%m/%d/', blank=True, null=True, verbose_name='Imagem')
 
     def __str__(self):
         return self.name_cat
@@ -21,7 +22,8 @@ class Post(models.Model):
     summary_post = models.TextField(verbose_name='Resumo')
     category_post = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, blank=True, verbose_name='Categoria')
     image_post = models.ImageField(upload_to ='post_img/%Y/%m/%d/', blank=True, null=True, verbose_name='Imagem')
-    publisher_post = models.BooleanField(default=False, verbose_name='Publicado')        
+    publisher_post = models.BooleanField(default=False, verbose_name='Publicado')  
+    emphasis_post = models.BooleanField(default=False, verbose_name='Destaque')      
 
     def __str__(self):
         return self.title_post

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comentario, Categoria 
+from .models import Post, Comentario, Categoria
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -26,7 +26,7 @@ admin.site.register(Comentario, ComentarioAdmin)
 
 
 class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name_cat')
+    list_display = ('id', 'name_cat', 'image_cat')
     list_display_links = ('id', 'name_cat')
 
 

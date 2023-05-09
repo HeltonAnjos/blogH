@@ -1,27 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container px-lg-5">
-    <a class="navbar-brand" href="{% url 'home' %}">BLOG HJ</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="pt-5">INÍCIO</a>
-        </li>
-        <li class="nav-item"><a class="nav-link active" href="#!">SOBRE</a></li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#!">CONTATO</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<div class="container-fluid bg-dark">
+    <header>
+        <div class="container pl-0 pr-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                    aria-label="Alterna navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <h5><a class="nav-link active" id="#paginainicial" href="{% url 'home' %}"><i class="fa-solid fa-house"
+                                        style="color: #37bddf;"></i> BLOG H</a></h5>
+                        </li>
+                    </ul>
+                    <a class="nav-link active" href="{% url 'posts' %}" style="color: #37bddf;">Posts</a>
+                    <a class="nav-link active" href="{% url 'home' %}#about" style="color: #37bddf;">Sobre</a>
+                    <a class="nav-link active" href="{% url 'home' %}#contact" style="color: #37bddf;">Contato</a>
+                        <form class="form-inline" action="?" method="GET">
+                            <input class="form-control mr-sm-2" id="" type="text" value="{{request.GET.content_post}}" name="search" placeholder="Pesquisar" aria-label="Pesquisar" autocomplete="off">
+                            <button class="btn btn-info my-2 my-sm-0 mr-2" type="submit">Pesquisar</button>
+                            <button href="{% url 'home' %}" class="btn btn-secondary">Limpar</button>
+                        </form>
+                </div>
+            </nav>
+        </div>
+    </header>
+</div>

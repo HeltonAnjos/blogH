@@ -1,0 +1,32 @@
+{% load static %}
+
+{% load humanize %}
+
+<div class="jumbotron jumbotron-fluid bg-info pt-1 pb-1">
+    <h1 class="display-2 text-center">Posts</h1>
+</div>
+
+<section class="page-section" id="#posts">
+    <div class="container">
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-lg-4 text-center pt-4 pb-4 mb-4">
+                <div class="card" style="width: 20rem; height: 34rem;">
+                    <img class="card-img-top" src="{{ post.image_post.url }}" alt="Imagem de capa do card">
+                    <div class="card-body pb-4 mb-3">
+                        <h5 class="card-title">{{ post.title_post }}</h5>
+                        <p class="card-text">{{ post.summary_post }}</p>
+                        <p>
+                            <small class="text-muted">{{ post.date_post|naturalday }}
+                                | {{ post.comentario_set.count }} comentário(s)
+                                | {{ post.category_post }}
+                            </small>
+                        </p>
+                        <a href="{% url 'post_detail' post.id %}" class="btn btn-info">Leia mais...</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

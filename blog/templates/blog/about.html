@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block conteudo %}
+
+<section class="pt-5">
+  <div class="container px-lg-5">
+  
+    <div class="row gx-lg-5">
+      <div class="col-lg-6 col-xxl-12 mb-5">
+        <div class="card bg-light border-0 h-100">
+          <div class="jumbotron text-center p-4 p-lg-5 pt-0 pt-lg-0">
+            <h1 class="display-4">Sobre</h1>
+
+            <hr class="my-4 "/>
+            <p class="lead">
+                Esse blog foi desenvolvido em django para aprimorar conhecimentos básicos sobre a utilização desse template da linguagem Python. Foram utilizadas nesse site HTML, CSS e JavaScript. Ademais, fez-se necessário às libs ckeditor e stdimage para complementar as funcionalidades.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

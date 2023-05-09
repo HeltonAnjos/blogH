@@ -5,12 +5,45 @@ from .forms import FormComentario
 from .models import Comentario
 from django.contrib import messages
 from django.views import View
+from django.db.models import Q, Count, Case, When
+
 
 
 class HomeView(ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'posts'
+    ordering = '-id'
+    paginate_by = 3
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.order_by('-id').filter(publisher_post=True)
+        qs = qs.annotate(
+            number_comments=Count(
+                Case(
+                    When(comentario__publisher_comment=True, then=1)
+                )
+            )
+        )
+
+        return qs
+    
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['latest_articles'] = Post.objects.all()[:1]
+        return context
+    
+    def get_queryset(self):
+
+        pesquisa = self.request.GET.get('search')
+
+        if pesquisa:
+            posts = Post.objects.filter(content_post__icontains=pesquisa)
+        else:
+            posts = Post.objects.all()
+        
+        return posts
 
 
 class PostDetailView(View):
@@ -45,3 +78,22 @@ class PostDetailView(View):
         comentario.save()
         messages.success(request, 'Seu comentário foi enviado para revisão.')
         return redirect('post_detalhes', pk=self.kwargs.get('pk'))
+    
+    
+class PostsView(ListView):
+    model = Post
+    template_name = 'blog/posts.html'
+    context_object_name = 'posts'
+    ordering = '-id'
+    paginate_by = 3
+
+    def get_queryset(self):
+
+        pesquisa = self.request.GET.get('search')
+
+        if pesquisa:
+            posts = Post.objects.filter(content_post__icontains=pesquisa)
+        else:
+            posts = Post.objects.all()
+        
+        return posts

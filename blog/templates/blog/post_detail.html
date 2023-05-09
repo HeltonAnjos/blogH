@@ -3,78 +3,76 @@
 {% block titulo %}{{ post.title_post|title }} | {% endblock %}
 
 {% block conteudo %}
-<!-- POST -->
-<div class="row pt-5">
-    <div class="col-xl"></div>
-    <div class="col-xl-8 text-center">
-        <h2>{{ post.title_post }}</h2>
-        <h5>{{ post.summary_post }}</h5>
-        <p class="text-muted mt-4">
-            <small>
-                {{ post.author_post }} | {{ post.date_post }} | {{ post.category_post }}
-            </small>
-        </p>
-    </div>
-    <div class="col-xl"></div>
-</div>
 
-<div class="row pt-5">
-    <div class="col-xl"></div>
-    <div class="col-xl-8">
+<div class="container justify-content-center">
 
-        {% if post.image_post %}
-        <img class="img-fluid pb-5 " src="{{ post.image_post.url }}" alt="{{ post.title_post }}">
-        {% endif %}
+    <div class="row">
 
-        {{ post.content_post|safe }}
-
-    </div>
-    <div class="col-xl"></div>
-</div>
-
-{% if comentarios %}
-<div class="row pt-5">
-    <div class="col-xl"></div>
-    <div class="col-xl-8">
-        <h2 class="my-3">Comentários ({{ comentarios.count }})</h2>
-
-        {% for comentario in comentarios %}
-        <h5 class="mb-2 mt-5">{{ comentario.name_comment }} disse:</h5>
-        <small class="text-muted">{{ comentario.date_comment }}</small>
-        <p class="mb-1">{{ comentario.comment }}</p>
-        {% endfor %}
-
-    </div>
-    <div class="col-xl"></div>
-</div>
-{% endif %}
-
-<div class="row pt-5">
-    <div class="col-xl"></div>
-    <div class="col-xl-8">
-        <h2 class="my-3">Deixe um comentário</h2>
-
-        <form method="POST" action="#envia_comentario">
-            {% csrf_token %}
-
-            {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field }}
-            {% endfor %}
-
-            {% for visible_field in form.visible_fields %}
-            <div class="form-group">
-                {{ visible_field }}
+        <div class="col-12 text-center">
+            <div class="jumbotron bg-info mt-3 pt-1 pb-3">
+                <h1 class="display-2 text-center">{{ post.title_post }}</h1>
             </div>
+            <h2></h2>
+
+            <p class="text-muted mt-4">
+                <small>
+                    {{ post.author_post }} | {{ post.date_post }} | {{ post.category_post }}
+                </small>
+            </p>
+        </div>
+
+        <div class="col-12 text-center">
+
+            {% if post.image_post %}
+            <img class="img-fluid pb-5 rounded mx-auto d-block" src="{{ post.image_post.url }}"
+                alt="{{ post.title_post }} width=" width="500rem">
+            {% endif %}
+
+            <p>{{ post.content_post|safe }}</p>
+
+        </div>
+
+    {% if comentarios %}
+
+        <div class="col-12">
+            <h2 class="my-3">Comentários ({{ comentarios.count }})</h2>
+
+            {% for comentario in comentarios %}
+            <h5 class="mb-2 mt-5">{{ comentario.name_comment }} disse:</h5>
+            <small class="text-muted">{{ comentario.date_comment }}</small>
+            <p class="mb-1">{{ comentario.comment }}</p>
             {% endfor %}
 
-            {% include 'parciais/_messages.html' %}
-            <input id="envia_comentario" type="submit" class="btn btn-primary" value="Enviar">
-        </form>
+        </div>
+
+    {% endif %}
+        
+
+        <div class="col-12 mb-5 pb-5 justify-content-center">
+            <hr class="my-4">
+            <h2 class="my-3 text-center mb-5">Deixe um comentário</h2>
+
+            <form>
+                <div class="form-row justify-content-center">
+                    <div class="form-group col-5">
+                        <label for="inputName">Nome</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Nome">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputEmail4">Email</label>
+                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label for="comentario">Comentário</label>
+                        <textarea class="form-control" id="comentario" rows="3"  placeholder="Digite aqui o seu comentário"></textarea>
+                    </div>
+                </div>   
+                <div class="form-row justify-content-end">          
+                    <button type="submit" class="btn btn-info  justify-content-end">Enviar Comentário</button> 
+                </div>    
+            </form>
+        </div>
+
     </div>
-    <div class="col-xl"></div>
 </div>
-<!-- POST -->
-
 {% endblock %}
-
-
