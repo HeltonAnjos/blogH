@@ -17,11 +17,6 @@
                     <a class="nav-link active" href="{% url 'posts' %}" style="color: #37bddf;">Posts</a>
                     <a class="nav-link active" href="{% url 'home' %}#about" style="color: #37bddf;">Sobre</a>
                     <a class="nav-link active" href="{% url 'home' %}#contact" style="color: #37bddf;">Contato</a>
-                        <form class="form-inline" action="?" method="GET">
-                            <input class="form-control mr-sm-2" id="" type="text" value="{{request.GET.content_post}}" name="search" placeholder="Pesquisar" aria-label="Pesquisar" autocomplete="off">
-                            <button class="btn btn-info my-2 my-sm-0 mr-2" type="submit">Pesquisar</button>
-                            <button href="{% url 'home' %}" class="btn btn-secondary">Limpar</button>
-                        </form>
                 </div>
             </nav>
         </div>

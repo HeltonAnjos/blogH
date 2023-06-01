@@ -4,17 +4,20 @@
     <div class="jumbotron-fluid bg-info pt-1 pb-1">
         <h1 class="display-2 text-center">Novidade da semana</h1>
     </div>
-    <div class="container">
+    <div class="container stretched-link">
         <div class="row">
-            </div class="col-6">
+            <a href="{% url 'post_detail' post.id %}" style="text-decoration: none;">
+            <div class="col-12 text-dark">
                 <div class="media mt-4">
                     <img class=" img-fluid rounded" src="{{ post.image_post.url }}" alt="Imagem de exemplo genérica" width="450rem">
-                    <div class="media-body text-center">
-                        <h1 class="display-3">{{post.title_post}}</h1>
-                        <p>{{post.summary_post}}</p>
+                    <div class="media-body text-center ml-3">
+                        <h1 class="display-4 pb-5">{{post.title_post}}</h1>
+                        <h5 class="text-justify">{{post.summary_post}}</h5>
+                        <h5 class="pt-5 mt-5">continue a leitura...</h5>
                     </div>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 </section>

@@ -14,6 +14,8 @@ from pathlib import Path
 
 import os
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "blog.apps.BlogConfig",
     "django.contrib.humanize",
+    "sendmail",
 ]
 
 MIDDLEWARE = [
@@ -125,7 +128,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-INSTALLED_APPS += ('django_summernote', ) 
+INSTALLED_APPS += ('django_summernote', )
+
+
+# settings.py
+
+# Configurações de e-mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'johnhj1991@gmail.com'
+EMAIL_HOST_PASSWORD = 'aquiVaiASenhaQueVoceCriarNaSuaContaGoogle'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

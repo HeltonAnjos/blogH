@@ -1,48 +1,87 @@
-<div class="jumbotron-fluid bg-info pt-1 pb-1">
-    <h1 class="display-2 text-center">Contatos</h1>
+<div class="jumbotron-fluid bg-info pt-1 pb-1" id="contact">
+  <h1 class="display-2 text-center">Contatos</h1>
 </div>
-<section id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-6 mt-5">
-                <div>
-                    <h2><a href="#" class="g" style="color: #0cb62e; text-decoration: none;">CHAMA-NOS PELO WHATSAPP <i
-                                class="fa-brands fa-square-whatsapp fa-2xl stretched-link"
-                                style="color: #0cb62e;"></i></a></h2>
-                </div>
+<section class="bg-dark" >
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-6 mt-5">
+        <h2>
+          <a href="#" class="g" style="color: #0cb62e; text-decoration: none"
+            >CHAME-NOS PELO WHATSAPP
+            <i
+              class="fa-brands fa-square-whatsapp fa-2xl fa-beat stretched-link"
+              style="color: #0cb62e"
+            ></i
+          ></a>
+        </h2>
+      </div>
+      <div class="col-6 mt-5">
+        <h2>
+          <a href="#" class="g" style="color: #d72714; text-decoration: none"
+            >FAÇA-NOS UMA VISITA <i
+              class="fa-solid fa-location-dot fa-2xl fa-bounce stretched-link"
+              style="color: #d72714"
+              href="#"
+            ></i
+          ></a>
+        </h2>
+      </div>
+      <div class="col-12 mt-5">
+        <div class="card p-5 justify-content-center">
+            <h1 class="text-center pb-3">MANDE-NOS SUAS SUGESTÕES</h1>
+            <form method="post" action="{% url 'send_email' %}" autocomplete="off">
+            {% csrf_token %}
+            <div class="form-row justify-content-center">
+              <div class="form-group col-4">
+                <label for="name"></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Nome"
+                />
+              </div>
+              <div class="form-group col-4">
+                <label for="subject"></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subject"
+                  name="subject"
+                  placeholder="Assunto"
+                />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="email"></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="form-group col-12">
+                <label for="message"></label>
+                <textarea
+                  class="form-control"
+                  id="message"
+                  name="message"
+                  rows="3"
+                  placeholder="Mensagem"
+                ></textarea>
+              </div>
             </div>
-            <div class="col-6 mt-5">
-                <div>
-                    <h2><a href="#" class="g" style="color: #d72714; text-decoration: none;">FAÇA-NOS UMA VISITA<i
-                                class="fa-solid fa-location-dot fa-2xl stretched-link" style="color: #d72714;"
-                                href="#"></i></a></h2>
-                </div>
+            <div class="form-row justify-content-end">
+              <button type="submit" class="btn btn-info justify-content-end">
+                Enviar mensagem
+              </button>
             </div>
-            <div>
-                <form>
-                    <div class="form-row justify-content-center">
-                        <div class="form-group col-4">
-                            <label for="inputName">Nome</label>
-                            <input type="text" class="form-control" id="inputName" placeholder="Nome">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                        </div>
-                        <div class="form-group col-4">
-                            <label for="inputAssunto">Assunto</label>
-                            <input type="text" class="form-control" id="inputAssunto" placeholder="Assunto">
-                        </div>
-                        <div class="form-group col-md-10">
-                            <label for="mensagem">Comentário</label>
-                            <textarea class="form-control" id="mensagem" rows="3"  placeholder="Mensagem"></textarea>
-                        </div>
-                    </div>   
-                    <div class="form-row justify-content-end">          
-                        <button type="submit" class="btn btn-info  justify-content-end">Enviar Comentário</button> 
-                    </div>    
-                </form>
-            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </section>
+{% include 'parciais/_messages.html' %}

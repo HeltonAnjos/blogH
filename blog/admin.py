@@ -15,11 +15,12 @@ admin.site.register(Post, PostAdmin)
 
 
 class ComentarioAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name_comment', 'email_comment',
-                    'post_comment', 'date_comment',
-                    'publisher_comment')
-    list_editable = ('publisher_comment',)
-    list_display_links = ('id', 'name_comment', 'email_comment',)
+    list_display = ('id', 'name',
+                    'post', 'date_comment',
+                    'status')
+    list_editable = ('status',)
+    list_display_links = ('id', 'name',)
+    list_filter = ('status',)
 
 
 admin.site.register(Comentario, ComentarioAdmin)

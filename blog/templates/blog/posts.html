@@ -6,6 +6,31 @@
 
 {% block conteudo %}
 
+<div class="bg-dark">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <h5><a class="nav-link mr-1" style="color: #37bddf;">Nossas categorias <i class="fa-solid fa-circle-chevron-right" style="color: white;"></i></a></h5>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'categorias' 'smartphone' %}" style="color: #37bddf;">Smartphone</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'categorias' 'tecnologia' %}" style="color: #37bddf;">Tecnologia</a>
+                </li>
+            </ul>
+            <form class="form-inline" action="?" method="GET">
+                <input class="form-control mr-sm-2" id="" type="text" value="{{request.GET.content_post}}" name="search" placeholder="Pesquisar" aria-label="Pesquisar" autocomplete="off">
+                <button class="btn btn-info my-2 my-sm-0 mr-2" type="submit">Pesquisar</button>
+                <button href="{% url 'home' %}" class="btn btn-secondary">Limpar</button>
+            </form>
+            </div>
+        </nav>
+    </div>
+</div>
+
 {% include 'parciais/_posts.html' %}
 
 {% include 'parciais/_pagination.html' %}
