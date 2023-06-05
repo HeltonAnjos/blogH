@@ -148,7 +148,7 @@ class EmailView(FormView):
             subject,
             corpo_mensagem,
             settings.DEFAULT_FROM_EMAIL,
-            ['johnhj1991@gmail.com'],
+            ['seuEmailQueReceberáOsEmailsDosUsuários'],
             fail_silently=False,
             connection=connection
         )
